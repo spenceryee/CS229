@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
         number[endvalue - value] = '\0';
         dprintf(fd, "%s", number);
         
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 83; i++) {
             feature = strstr(endvalue, "\"x\"");
             value = feature + 5;
             endvalue = strchr(value, ',');
