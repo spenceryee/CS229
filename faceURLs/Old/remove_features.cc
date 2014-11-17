@@ -6,7 +6,9 @@ using namespace std;
 
 int main(){
 	ofstream newstream;
+	ofstream categorystream;
 	newstream.open("landmarks_matrix.txt");
+	categorystream.open("labels.txt");
 	for(int i = 1; i <= 8; i++){
 		string filename = to_string(i) + "_landmark_parsed.txt";
 		ifstream oldstream(filename);
@@ -16,7 +18,7 @@ int main(){
 			ss << line;
 			string emotion, intensity, angle1, angle2, angle3;
 			ss >> emotion >> intensity >> angle1 >> angle2 >> angle3;
-			newstream << emotion;
+			categorystream << emotion << endl;
 			for(int j = 0; j < 167; j++){
 				string word;
 				ss >> word;
@@ -26,5 +28,6 @@ int main(){
 		}
 	}
 	newstream.close();
+	categorystream.close();
 	return 0;
 }
