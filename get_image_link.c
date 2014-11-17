@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
         linelen = getline(&line, &linecap, fp);
         if (linelen <= 0) {printf("Image without output\n"); break;}
         char *link = strstr(line, "direct_link");
-        if (link == NULL) {printf("JSON has no direct link\n"); break;}
+        if (link == NULL) {printf("JSON has no direct link: %s\n", line); break;}
         link += 14; //To the actual link
         char *endquote = strchr(link, '"');
         if (endquote == NULL) {printf("JSON direct link does not end in quote\n"); break;}
