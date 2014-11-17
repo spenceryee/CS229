@@ -7,11 +7,12 @@
 int main(int argc, char *argv[]) {
     FILE *fp = fopen(argv[1], "r");
     if (!fp) {printf("Cannot open file\n"); return 1;}
-    char filename[2];
-    filename[1] = '\0';
+    char filename[15];
+    filename[14] = '\0';
+    strcpy(filename, "faceURLs/i.txt");
     int fds[8];
     for (char i = '1'; i <= '8'; i++) {
-        filename[0] = i;
+        filename[9] = i;
         fds[i - '1'] = creat(filename, 0644);
     }
     while (true) {
