@@ -1,9 +1,9 @@
 #!/bin/sh
 
-rm raw-data.txt
-find . -iname "*.jpg" -exec ./upload-to-imageshack.sh {} \;
-./get_image_link raw-data.txt
-cd faceURLs
+rm raw-data-CK.txt
+find . -iname "*.png" -exec ./upload-to-imageshack.sh {} \;
+./get_image_link_CK raw-data-CK.txt
+cd CK+_URLs/
 for var in 1 2 3 4 5 6 7 8
 do
 	echo "PROCESSING $var"
