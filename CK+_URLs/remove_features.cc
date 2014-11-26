@@ -17,7 +17,7 @@ int main(){
 			stringstream ss;
 			ss << line;
 			string emotion, intensity, angle1, angle2, angle3;
-			ss >> emotion >> intensity >> angle1 >> angle2 >> angle3;
+			ss >> emotion >> angle1 >> angle2 >> angle3;
 			categorystream << emotion << endl;
 			for(int j = 0; j < 167; j++){
 				string word;
