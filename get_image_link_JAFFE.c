@@ -23,18 +23,18 @@ int main(int argc, char *argv[]) {
         linelen = getline(&line, &linecap, fp);
         if (linelen <= 0) break;
         switch (line[11]) { //1st letter of the emotion
-            case 'a': {emotion = '1'; break;} //anger
-            case 'c': {emotion = '2'; break;} //contempt
-            case 'd': {emotion = '3'; break;} //disgust
-            case 'f': {emotion = '4'; break;} //fear
-            case 'h': {emotion = '5'; break;} //happiness
-            case 'n': {emotion = '6'; break;} //neutral
-            case 's': {
-                if (line[12] == 'a') emotion = '7'; //sadness
+            case 'A': {emotion = '1'; break;} //anger
+            case 'C': {emotion = '2'; break;} //contempt
+            case 'D': {emotion = '3'; break;} //disgust
+            case 'F': {emotion = '4'; break;} //fear
+            case 'H': {emotion = '5'; break;} //happiness
+            case 'N': {emotion = '6'; break;} //neutral
+            case 'S': {
+                if (line[12] == 'A') emotion = '7'; //sadness
                 else emotion = '8'; //surprise
                 break;
             }
-            default: {printf("Unrecognized emotion, %s\n", line + 8); break;}
+            default: {printf("Unrecognized emotion, %s\n", line + 11); break;}
         }
         free(line);
         line = NULL;
