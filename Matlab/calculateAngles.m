@@ -1,22 +1,50 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1343\cocoasubrtf160
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+function dat = calculateAngles(X)
 
-\f0\fs24 \cf0 newdat = zeros(565, 275643);\
-col = 1;\
-for i=1:2:161\
-    for j=(i + 2):2:163\
-        for k=(j + 2):2:165\
-            a = (dat(:, i) - dat(:, j)) .^ 2 + (dat(:, i + 1) - dat(:, j + 1)) .^ 2;\
-            b = (dat(:, k) - dat(:, j)) .^ 2 + (dat(:, k + 1) - dat(:, j + 1)) .^ 2;\
-            c = (dat(:, i) - dat(:, k)) .^ 2 + (dat(:, i + 1) - dat(:, k + 1)) .^ 2;\
-            newdat(:, col) = acos((a + b - c) ./ (2 .* sqrt(a .* b)));\
-            newdat(:, col + 1) = acos((a + c - b) ./ (2 .* sqrt(a .* c)));\
-            newdat(:, col + 2) = acos((c + b - a) ./ (2 .* sqrt(c .* b)));\
-            col = col + 3;\
-        end\
-    end\
-    disp(i);\
-end}
+features = [30, 36, 34;
+            30, 32, 34;
+            76, 82, 80;
+            76, 78, 80;
+            22, 27, 26;
+            22, 20, 26;
+            68, 73, 72;
+            68, 66, 72;
+            63, 65, 64;
+            63, 59, 64;
+            38, 39, 47;
+            38, 46, 47;
+            38, 48, 47;
+            38, 55, 47;
+            38, 65, 47;
+            22, 36, 26;
+            22, 32, 26;
+            68, 82, 72;
+            68, 78, 72;
+            30, 31, 32;
+            30, 35, 36;
+            35, 36, 37;
+            31, 32, 33;
+            32, 33, 34;
+            36, 37, 34;
+            76, 77, 78;
+            77, 78, 79;
+            78, 79, 80;
+            76, 81, 82;
+            81, 82, 83;
+            82, 83, 80;
+            38, 50, 49;
+            50, 55, 53;
+            52, 53, 47;
+            38, 51, 48;
+            51, 48, 54;
+            48, 54, 47];
+
+[rows, cols] = size(features);
+[numEx, numFeat] = size(X);
+dat = zeros(numEx, rows);
+features = features * 2;
+for i=1:rows
+a = (dat(:, features(i, 1)) - dat(:, features(i, 2))) .^ 2 + (dat(:, features(i, 1) + 1) - dat(:, features(i, 2) + 1)) .^ 2;
+b = (dat(:, features(i, 3)) - dat(:, features(i, 2))) .^ 2 + (dat(:, features(i, 3) + 1) - dat(:, features(i, 2) + 1)) .^ 2;
+c = (dat(:, features(i, 1)) - dat(:, features(i, 3))) .^ 2 + (dat(:, features(i, 1) + 1) - dat(:, features(i, 3) + 1)) .^ 2;
+dat(:, i) = acos((a + b - c) ./ (2 .* sqrt(a .* b)));
+end
