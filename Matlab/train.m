@@ -11,8 +11,7 @@ load JAFFEy.dat
 %newtrain =
 %newtrain = [TrainMatrix(:, 1:91) TrainMatrix(:, 93:95) TrainMatrix(:, 97) TrainMatrix(:, 99:109) TrainMatrix(:, 111:117) TrainMatrix(:, 119:129) TrainMatrix(:, 131:167)];
 %newtrain = TrainMatri
-calculateTFEIDAngles;
-calculateCKAngles;
+
 newMatrix = [angledatTFEID; angledatCK];%; CK_Matrix];%(:, 2:167)];
 newCategory = [TFEIDy; CK_y];%; CK_Category];%; CKCategory];
 
