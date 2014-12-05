@@ -1,4 +1,4 @@
-function output = predict(vector)
+function output = predictEmotion(vector)
 addpath('/Applications/MATLAB_R2014b.app/bin/maci64/libsvm-3.20/matlab');
 
 load TFEIDX.dat
@@ -18,12 +18,12 @@ mult = 35;
 
 X0 = [CK_norm;TFEIDnorm;JAFFEnorm];
 X1 = [mult*CK_angles;mult*TFEIDangles;mult*JAFFEangles];
-X2 = [X0 X1];
+X2 = [X1];
 y = [CK_y; TFEIDy;JAFFEy];
 
 s = ' -g 0.00050 -c 2.5';
 model = svmtrain(y, X2, strcat('-q', s));
-ex = [normalize(vector) mult*calculateAngles(vector)];
+ex = mult*calculateAngles(vector); %[normalize(vector) mult*calculateAngles(vector)];
 blah = ones(size(vector, 1), 1);
 emotions = ['anger    ';'contempt ';'disgust  ';'fear     ';'happiness';'neutral  ';'sadness  ';'surprise '];
-output = emotions(svmpredict(blah, ex, model, 0), :);
+output = emotions(svmpredict(blah, ex, model, '-q'), :);
