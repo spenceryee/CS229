@@ -7,7 +7,7 @@
 int main(int argc, char *argv[]) {
     FILE *input_file = fopen(argv[1], "rb");
     if (!input_file) {printf("Cannot open file\n"); return 1;}
-    int fd = creat("webcam_matrix.txt", 0644);
+    int fd = creat("webcam_matrix.dat", 0644);
     
     char *file_contents;
     long input_file_size;

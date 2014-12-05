@@ -27,7 +27,8 @@ def handler(event):
 		    #handle exception
 		    print "u dun goofed"
 		fullname = "/Users/mmwang/Pictures/Photo\ Booth\ Library/Pictures/" + name.replace(" ", "\ ")
-		os.system("./upload-to-imageshack.sh " + fullname);
+		os.system("./upload-to-imageshack.sh " + fullname)
+		os.system("./webcam-data-collect.sh")
     except ( KeyboardInterrupt ) as e:
         print 'handler', e
         AppHelper.stopEventLoop()
