@@ -33,7 +33,7 @@ s = ' -g 0.00050 -c 2.5';
 % CKe = 63;
 % JAFFEs = 185;
 % JAFFEe = 213;
-%model = svmtrain(y, X2, strcat('-q', s));
+model = svmtrain(y, X2, strcat('-q', s));
 % X0 = JAFFEnorm(1:2:213, :);%[CK_norm(CKs:2:CKe, :); TFEIDnorm(TFEIDs:2:TFEIDe, :)];%; JAFFEnorm(JAFFEs:2:JAFFEe, :)];
 % X1 = mult*JAFFEangles(1:2:213, :);%[mult*CK_angles(CKs:2:CKe, :); mult*TFEIDangles(TFEIDs:2:TFEIDe, :)];%; mult*JAFFEangles(JAFFEs:2:JAFFEe, :)];
 % X2 = [X0 X1];
@@ -46,19 +46,23 @@ output = svmpredict(y, X2, model, 0);
 % model = svmtrain(y, X1, strcat('-v 2 -q', s));
 % model = svmtrain(y, X1, strcat('-v 5 -q', s));
 % model = svmtrain(y, X1, strcat('-v 10 -q', s));
-% svmtrain(y, X2, strcat('-v 2 -q', s));
-% svmtrain(y, X2, strcat('-v 5 -q', s));
-% svmtrain(y, X2, strcat('-v 10 -q', s));
-
-
-
-% % Compute the error on the test set
-% error=0;
-% for i=1:numTrainDocs
-%   if (trainCategory(i) ~= output(i))
-%     error=error+1;
-%   end
-% end
-%
-% %Print out the classification error on the test set
-% error/numTrainDocs
+%svmtrain(y, X2, strcat('-v 2 -q', s));
+%svmtrain(y, X2, strcat('-v 5 -q', s));
+%svmtrain(y, X2, strcat('-v 10 -q', s));
+count = 0;
+    confusionMatrix = zeros(8, 8);
+    diff = y - output;
+    numTest = size(output, 1);
+    for i=1:numTest
+        if diff(i) == 0
+            count = count + 1;
+        end
+        confusionMatrix(y(i), output(i)) = confusionMatrix(y(i), output(i)) + 1;
+    end
+    accuracy = count / numTest
+confusionMatrix
+csvwrite('Results/SVM-training.csv', confusionMatrix);
+A = round(100*confusionMatrix ./ repmat(sum(confusionMatrix, 2), 1, 8), 2)
+csvwrite('Results/SVM-training-recall.csv', A);
+A = round(100*confusionMatrix ./ repmat(sum(confusionMatrix, 1), 8, 1), 2)
+csvwrite('Results/SVM-training-precision.csv', A);

@@ -46,5 +46,7 @@ for i=1:rows
 a = (X(:, features(i, 1)) - X(:, features(i, 2))) .^ 2 + (X(:, features(i, 1) + 1) - X(:, features(i, 2) + 1)) .^ 2;
 b = (X(:, features(i, 3)) - X(:, features(i, 2))) .^ 2 + (X(:, features(i, 3) + 1) - X(:, features(i, 2) + 1)) .^ 2;
 c = (X(:, features(i, 1)) - X(:, features(i, 3))) .^ 2 + (X(:, features(i, 1) + 1) - X(:, features(i, 3) + 1)) .^ 2;
-dat(:, i) = acos((a + b - c) ./ (2 .* sqrt(a .* b)));
+%pos = sign(2*X(:, features(i, 2) + 1) - X(:, features(i, 1) + 1) - X(:, features(i, 3) + 1));
+%dat(:, i) = pos .* (pi - acos((a + b - c) ./ (2 .* sqrt(a .* b))));
+dat(:, i) = pi - acos((a + b - c) ./ (2 .* sqrt(a .* b)));
 end
